@@ -1,0 +1,49 @@
+package com.natwest.customer.controller;
+	import java.util.List;
+
+	import org.springframework.beans.factory.annotation.Autowired;
+	import org.springframework.http.HttpStatus;
+	import org.springframework.http.ResponseEntity;
+	import org.springframework.web.bind.annotation.CrossOrigin;
+	import org.springframework.web.bind.annotation.GetMapping;
+	import org.springframework.web.bind.annotation.PostMapping;
+	import org.springframework.web.bind.annotation.RequestBody;
+	import org.springframework.web.bind.annotation.RequestMapping;
+	import org.springframework.web.bind.annotation.RestController;
+	import com.natwest.customer.model.Customer;
+	import com.natwest.customer.service.ICustomerService;
+
+
+	@RestController
+	@RequestMapping("capi/v1")
+	@CrossOrigin("*")
+	public class CustomerController {
+		@Autowired
+		private ICustomerService customerService;
+		private ResponseEntity<?> responseEntity;
+		
+		@Autowired
+		public CustomerController(ICustomerService customerService) {
+			
+			this.customerService = customerService;
+		}
+		
+		@PostMapping("/customer")
+		public ResponseEntity<?> savecustToDB(@RequestBody Customer cust) {
+		
+				Customer createdUser = customerService.saveCustomer(cust);
+				this.responseEntity = new ResponseEntity<>(createdUser,HttpStatus.CREATED);
+		
+			
+			return this.responseEntity;
+		}
+		
+		@GetMapping("/customers")
+		public ResponseEntity<?> getAllUsers(){
+		
+				List<Customer> usersList = this.customerService.getAllCustomers();
+				this.responseEntity = new ResponseEntity<>(usersList,HttpStatus.OK);
+			
+			return this.responseEntity;
+		}
+	}

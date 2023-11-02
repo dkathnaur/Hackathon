@@ -1,0 +1,41 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class SeliniumJavaDemo {
+
+    public static void main(String[] args) {
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\My pc\\Downloads\\chromedriver_win32\\chromedriver.exe");
+        WebDriver webd = new ChromeDriver();
+
+        try {
+            webd.get("https://gitlab.stackroute.in/users/sign_in");
+
+
+            webd.findElement(By.id("user_login")).sendKeys("kathd@rbos.co.uk");
+
+            // Enter password
+            webd.findElement(By.id("user_password")).sendKeys("ED1B96AB4F12");
+
+            // Click the login button
+            webd.findElement(By.name("commit")).click();
+
+            // Wait for the page to load
+            wait.until(ExpectedConditions.urlToBe("https://gitlab.stackroute.in/"));
+
+            String url = webd.getCurrentUrl();
+
+            if (url.equals("https://gitlab.stackroute.in/")) {
+                System.out.println("Test Case Completed Successfully ...");
+            } else {
+                System.out.println("Test Case did not Complete Successfully ...");
+            }
+        } catch (Exception e) {
+            System.err.println("An error occurred: " + e.getMessage());
+        } finally {
+            webd.quit();
+        }
+    }
+}

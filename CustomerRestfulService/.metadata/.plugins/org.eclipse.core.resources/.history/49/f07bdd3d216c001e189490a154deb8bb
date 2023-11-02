@@ -1,0 +1,62 @@
+package program;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class SeliniumJavaDemo {
+
+    public static void main(String[] args) {
+        WebDriver webd = new ChromeDriver();
+
+        // Set the ChromeDriver path
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\My pc\\Downloads\\chromedriver_win32 (1)\\chromedriver.exe");
+
+        // Navigate to the registration page
+        webd.get("http://localhost:3002/register");
+
+        // Find and populate the registration form fields
+        webd.findElement(By.id("firstName")).sendKeys("Divya");
+        webd.findElement(By.id("lastName")).sendKeys("Kathnaur");
+        webd.findElement(By.id("username")).sendKeys("kathd");
+        webd.findElement(By.id("address")).sendKeys("Delhi");
+        webd.findElement(By.id("pincode")).sendKeys("110019");
+        webd.findElement(By.id("email")).sendKeys("kathd@gmail.com");
+        webd.findElement(By.id("phone")).sendKeys("1234563758");
+        webd.findElement(By.id("password")).sendKeys("Divya123");
+
+        // Use explicit wait to wait for the "Sign Up" button to be clickable
+        WebDriverWait wait = new WebDriverWait(webd, 10);
+        WebElement signUpButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"root\"]/div/main/div/form/button")));
+
+        // Click the "Sign Up" button
+        signUpButton.click();
+
+        // After registration, you would typically go to the login page
+        webd.get("http://localhost:3002/login");
+
+        // Find and populate the login form fields
+        webd.findElement(By.id("email")).sendKeys("kathd@gmail.com");
+        webd.findElement(By.id("password")).sendKeys("Divya123");
+
+        // Use explicit wait to wait for the "Login" button to be clickable
+        WebElement loginButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"root\"]/div/main/div/form/button")));
+
+        // Click the "Login" button
+        loginButton.click();
+
+        // After successful login, you can check for the dashboard URL
+        String dashboardUrl = webd.getCurrentUrl();
+
+        if (dashboardUrl.equals("http://localhost:3002/dashboard")) {
+            System.out.println("Login Successful. Redirected to the Dashboard.");
+        } else {
+            System.out.println("Login Unsuccessful.");
+        }
+
+        webd.close();
+    }
+}

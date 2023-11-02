@@ -1,0 +1,74 @@
+package com.natwest.customer.controller;
+import java.util.Date;
+
+import java.util.HashMap;
+import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import com.natwest.customer.model.Customer;
+import com.natwest.customer.service.ICustomerService;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import jakarta.servlet.ServletException;
+@RestController
+@RequestMapping("auth/v1")
+@CrossOrigin("*")
+public class CustomerAuthenticationController {
+
+    private Map<String, String> map = new HashMap<>();
+
+    private ICustomerService customerService;
+
+    @Autowired
+    public CustomerAuthenticationController(ICustomerService customerService) {
+        this.customerService = customerService;
+    }
+
+    @GetMapping("/")
+    public String serverStarted() {
+        return "Authentication Server Started";
+    }
+
+    @PostMapping("/Login")
+    public ResponseEntity<?> doLogin(@RequestBody Customer customer) {
+        try {
+            // Verify the user's credentials against your database
+            boolean isValid = customerService.validateCustomerService(customer.getEmail(), customer.getPassword());
+
+            if (isValid) {
+                // Credentials are valid, generate a JWT token
+                String jwtToken = generateToken(customer.getEmail());
+
+                map.put("message", "User Successfully LoggedIn");
+                map.put("token", jwtToken);
+                return new ResponseEntity<>(map, HttpStatus.OK);
+            } else {
+                // Invalid credentials
+                map.put("message", "Invalid Credentials");
+                map.put("token", null);
+                return new ResponseEntity<>(map, HttpStatus.UNAUTHORIZED);
+            }
+        } catch (Exception e) {
+            map.put("message", e.getMessage());
+            map.put("token", null);
+            return new ResponseEntity<>(map, HttpStatus.UNAUTHORIZED);
+        }
+    }
+
+    private String generateToken(String email) {
+        String jwtToken = Jwts.builder()
+                .setSubject(email)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + 3000000))
+                .signWith(SignatureAlgorithm.HS256, "secret key")
+                .compact();
+        return jwtToken;
+    }
+}

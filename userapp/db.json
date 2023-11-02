@@ -1,0 +1,92 @@
+{
+  "posts": [
+    {
+      "firstName": "Divya",
+      "lastName": "B",
+      "username": "div",
+      "address": "delhi",
+      "pincode": 110018,
+      "email": "div@gmail.com",
+      "phone": 7563825465,
+      "password": "Divya123#",
+      "id": 1
+    },
+    {
+      "firstName": "divya",
+      "lastName": "k",
+      "username": "divya",
+      "address": "delhi",
+      "pincode": 110023,
+      "email": "divya@gmail.com",
+      "phone": 1243547586,
+      "password": "Divyaa1996@",
+      "id": 2
+    },
+    {
+      "firstName": "gungun",
+      "lastName": "k",
+      "username": "gungun",
+      "address": "mumbai",
+      "pincode": 110027,
+      "email": "gungun@gmail.com",
+      "phone": 1233546576,
+      "password": "Gungun123@",
+      "id": 3
+    },
+    {
+      "firstName": "Rish",
+      "lastName": "B",
+      "username": "Rish",
+      "address": "Pune",
+      "pincode": 110019,
+      "email": "R@gmail.com",
+      "phone": 6453675697,
+      "password": "Rish123@",
+      "id": 4
+    },
+    {
+      "firstName": "Tim",
+      "lastName": "J",
+      "username": "Tim",
+      "address": "Delhi",
+      "pincode": 110019,
+      "email": "T@gmail.com",
+      "phone": 2436543567,
+      "password": "Tim123@1",
+      "id": 5
+    },
+    {
+      "firstName": "tim",
+      "lastName": "k",
+      "username": "tim",
+      "address": "delhi",
+      "pincode": 110019,
+      "email": "tim@gmail.com",
+      "phone": 3425467836,
+      "password": "Tim1234#",
+      "id": 6
+    },
+    {
+      "firstName": "Tanu",
+      "lastName": "K",
+      "username": "Tanu",
+      "address": "Delhi",
+      "pincode": 110018,
+      "email": "Tanu@gmail.com",
+      "phone": 3645721238,
+      "password": "Tanu123#",
+      "id": 7
+    },
+    {
+      "firstName": "Divya",
+      "lastName": "K",
+      "username": "Divya",
+      "address": "Delhi",
+      "pincode": 110019,
+      "email": "kathd@gmail.com",
+      "phone": 1234567896,
+      "password": "Divyaa123#",
+      "id": 8
+    }
+  ]
+}

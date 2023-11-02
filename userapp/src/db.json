@@ -1,0 +1,53 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    },
+    {
+      "firstName": "divya",
+      "lastName": "kathnaur",
+      "username": "divya",
+      "address": "aravali",
+      "pincode": 110019,
+      "email": "kathd@rbos.co.uk",
+      "phone": 8465637595,
+      "password": "Divyaa123@",
+      "id": 2
+    },
+    {
+      "firstName": "divya",
+      "lastName": "kathnaur",
+      "username": "divya",
+      "address": "aravalo",
+      "pincode": 110019,
+      "email": "kathd@rbos.co.uk",
+      "phone": 7564384756,
+      "password": "Divyaa123@",
+      "id": 3
+    },
+    {
+      "firstName": "divya",
+      "lastName": "k",
+      "username": "divya",
+      "address": "aravali",
+      "pincode": 110019,
+      "email": "kathd@rbos.co.uk",
+      "phone": 8574635278,
+      "password": "Divyaa123@",
+      "id": 4
+    },
+    {
+      "firstName": "Divya",
+      "lastName": "K",
+      "username": "Divya",
+      "address": "aravali",
+      "pincode": 110019,
+      "email": "kathd@rbos.co.uk",
+      "phone": 1234567891,
+      "password": "Divyaa123@",
+      "id": 5
+    }
+  ]
+}

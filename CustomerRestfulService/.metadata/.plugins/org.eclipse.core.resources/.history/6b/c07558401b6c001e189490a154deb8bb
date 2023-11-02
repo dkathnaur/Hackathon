@@ -1,0 +1,39 @@
+package program;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.*;
+
+public class SeliniumJavaDemo {
+
+	public static void main(String[] args) 
+	{
+		
+		WebDriver webd = new ChromeDriver();
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\My pc\\Downloads\\chromedriver_win32 (1)\\chromedriver.exe");
+		webd.get("http://localhost:3002/register");
+		
+		webd.findElement(By.id("firstName")).sendKeys("Divya");
+		webd.findElement(By.id("lastName")).sendKeys("Kathnaur");
+		webd.findElement(By.id("username")).sendKeys("kathd");
+		webd.findElement(By.id("address")).sendKeys("Delhi");
+		webd.findElement(By.id("pincode")).sendKeys("110019");
+		webd.findElement(By.id("email")).sendKeys("kathd@gmail.com");
+		webd.findElement(By.id("phone")).sendKeys("1234563758");
+		webd.findElement(By.id("password")).sendKeys("Divya123");
+	
+		webd.findElement(By.xpath("//*[@id=\"root\"]/div/main/div/form/button")).click();
+		String url = webd.getCurrentUrl();
+		
+		if(url.equals("http://localhost:3002/login"))
+		{
+			System.out.println("Registeration done Successfully ...");
+		}
+		else
+		{
+			System.out.println("Registeration is Unsuccessfully ...");
+		}
+		
+		webd.close();	
+	}
+}

@@ -1,0 +1,11 @@
+package com.natwest.customer.repository;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
+import org.springframework.stereotype.Repository;
+import com.natwest.customer.model.Customer;
+@Repository
+public interface ICustomerRepository extends MongoRepository<Customer, String> {
+	
+	@Query("{'email': {$in : [?0]},'password': {$in : [?1]}}")
+	public Customer validateCustomer(String email, String password);
+}

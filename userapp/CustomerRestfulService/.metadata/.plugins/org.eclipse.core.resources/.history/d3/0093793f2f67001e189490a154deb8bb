@@ -1,0 +1,127 @@
+package com.natwest.customer.service;
+import java.util.List;
+import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.natwest.customer.model.Customer;
+import com.natwest.customer.repository.ICustomerRepository;
+@Service
+public class CustomerServiceImpl implements ICustomerService {
+	
+	private ICustomerRepository customerrepository;
+	
+	
+	@Autowired
+	public CustomerServiceImpl(ICustomerRepository customerrepository) {
+		super();
+		this.customerrepository = customerrepository;
+	}
+	
+	
+	@Override
+	public boolean validateCustomerService(String email, String password) {
+	
+		Customer customer  = customerrepository.validateCustomer(email, password);
+		System.out.println("Customer" + customer);
+		if(customer != null)
+			return true;
+		else
+			return false;
+	}
+	
+	@Override
+	public Customer saveCustomer(Customer cObj) {
+		Optional<Customer> customeroptional = this.customerrepository.findById(cObj.getEmail());
+		
+		Customer addcustomer = null;
+		
+		if(customeroptional.isPresent())
+		{
+			System.out.println("Data Already Exist with this ID, Cannot Add the Data....");
+		}
+		else
+		{
+			addcustomer =  this.customerrepository.save(cObj);
+		}
+		
+		return addcustomer;
+	}
+	@Override
+	public Customer updateCustomer(Customer cObj, String Email)
+	{
+		
+//		Optional<Customer> customeroptional = this.customerrepository.findById(Email);
+//		
+//		Customer cusObj = null;
+//		Customer updatedcustomer=null;
+//		
+//		if(customeroptional.isPresent())
+//		{
+//			cusObj = customeroptional.get();
+//			
+//			cusObj.setEmail(cusObj.getEmail());
+//			cusObj.setPassword(cusObj.getPassword());
+//			
+//			
+//			updatedcustomer = this.customerrepository.save(cusObj);
+//		}
+//		else
+//		{
+//			System.out.println("User Does Not Exists ...");
+//		}
+		
+		
+		return null;
+	}
+	@Override
+	public boolean deleteCustomerById(String Email) {
+		
+		
+		Optional<Customer> customeroptional = this.customerrepository.findById(Email);
+		
+		boolean status=false;
+		
+		if(customeroptional.isPresent())
+		{
+			this.customerrepository.delete(customeroptional.get());
+			status=true;
+		}
+		else
+		{
+			System.out.println("User does not Exists !!!! ");
+		}
+		
+		return status;
+	}
+	@Override
+	public Customer getCustomerById(String email) {
+	
+Optional<Customer> customeroptional = this.customerrepository.findById(email);
+		
+		Customer cObj =null;
+		
+		if(customeroptional.isPresent())
+		{
+			cObj = customeroptional.get();
+		}
+		else
+		{
+			System.out.println("User Does Not Exists ...");
+		}
+		
+		return cObj;
+		}
+	
+	@Override
+	public List<Customer> getAllCustomers() {
+		// TODO Auto-generated method stub
+		return this.customerrepository.findAll();
+	}
+	
+	
+//	@Override
+//	public List<Customer> getAllCustomers() {
+//
+//		return this.customerrepository.findAll();
+//	}
+}
